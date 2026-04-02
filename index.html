@@ -1,0 +1,915 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Margaret Holloway, Ph.D.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #F9F6F1;
+      --ink: #1A1714;
+      --muted: #7A746E;
+      --accent: #C17D5A;
+      --rule: #E2DDD7;
+      --sans: 'DM Sans', sans-serif;
+      --serif: 'Cormorant Garamond', serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 4rem;
+      background: rgba(249,246,241,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-name {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 80px;
+    }
+
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 4rem 6rem 4rem;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 0.9s ease forwards 0.2s;
+    }
+
+    .hero-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 5vw, 5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 0.3rem;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      font-style: italic;
+    }
+
+    .hero-bio {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--ink);
+      max-width: 480px;
+      margin-bottom: 3rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      background: var(--ink);
+      color: var(--cream);
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+
+    .btn-secondary {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .btn-secondary:hover { color: var(--accent); border-color: var(--accent); }
+
+    .hero-visual {
+      position: relative;
+      background: var(--ink);
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeIn 1.2s ease forwards 0.5s;
+    }
+
+    .hero-visual-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 3rem;
+    }
+
+    .hero-visual-bg {
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse at 30% 20%, rgba(193,125,90,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 80%, rgba(193,125,90,0.1) 0%, transparent 50%);
+    }
+
+    .hero-visual-quote {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.3;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.9s;
+    }
+
+    .hero-visual-quote span {
+      color: var(--accent);
+    }
+
+    .hero-visual-attr {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(249,246,241,0.4);
+      margin-top: 1.5rem;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 1.1s;
+    }
+
+    /* DIVIDER */
+    .section-divider {
+      height: 1px;
+      background: var(--rule);
+      margin: 0 4rem;
+    }
+
+    /* STATS BAR */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--rule);
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 1.2s;
+    }
+
+    .stat {
+      padding: 2.5rem 4rem;
+      border-right: 1px solid var(--rule);
+    }
+
+    .stat:last-child { border-right: none; }
+
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 7rem 4rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .section-num {
+      font-family: var(--serif);
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300;
+      line-height: 1.2;
+    }
+
+    .section-rule {
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+      margin-left: 1rem;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-text p:first-child {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .about-aside {
+      padding-top: 0.5rem;
+    }
+
+    .expertise-list {
+      list-style: none;
+      margin-bottom: 3rem;
+    }
+
+    .expertise-list li {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--rule);
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+    }
+
+    .expertise-list li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .aside-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    /* RESEARCH */
+    #research { background: var(--ink); color: var(--cream); }
+
+    #research .section-title { color: var(--cream); }
+    #research .section-num { color: var(--accent); }
+    #research .section-rule { background: rgba(249,246,241,0.15); }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    .research-card {
+      padding: 3rem 2.5rem;
+      border-right: 1px solid rgba(249,246,241,0.1);
+      transition: background 0.3s;
+    }
+
+    .research-card:last-child { border-right: none; }
+    .research-card:hover { background: rgba(193,125,90,0.08); }
+
+    .research-card-num {
+      font-family: var(--serif);
+      font-size: 3.5rem;
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(193,125,90,0.3);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    .research-card-title {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .research-card-desc {
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: rgba(249,246,241,0.55);
+    }
+
+    /* TEACHING */
+    .teaching-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 5rem;
+    }
+
+    .teaching-statement {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--ink);
+      margin-bottom: 2.5rem;
+    }
+
+    .teaching-statement em { color: var(--accent); font-style: italic; }
+
+    .teaching-body {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: var(--ink);
+    }
+
+    .course-list {
+      list-style: none;
+    }
+
+    .course-item {
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .course-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+
+    .course-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* COURSE CARDS */
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin-top: 3rem;
+    }
+
+    .course-card {
+      background: var(--cream);
+      padding: 1.6rem;
+      transition: background 0.2s;
+    }
+
+    .course-card:hover { background: #F5F1EB; }
+
+    .course-card-tag {
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+
+    .course-card-name {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 400;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+
+    .course-card-level-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .course-card-modality {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    .course-card-modality span {
+      display: inline-block;
+      background: var(--rule);
+      padding: 0.15rem 0.5rem;
+      border-radius: 2px;
+      margin-right: 0.3rem;
+      margin-top: 0.3rem;
+    }
+
+    /* CONTACT */
+    #contact { background: var(--cream); border-top: 1px solid var(--rule); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .contact-statement {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 2rem;
+    }
+
+    .contact-statement em { color: var(--accent); font-style: italic; }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 0.9rem;
+      transition: color 0.2s;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .contact-link:hover { color: var(--accent); }
+
+    .contact-link-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      min-width: 80px;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 2rem 4rem;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-name {
+      font-family: var(--serif);
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .footer-copy {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* SCROLL REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 2rem; }
+      .nav-links { gap: 1.5rem; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .hero-text { padding: 6rem 2rem 4rem; }
+      .stats-bar { grid-template-columns: 1fr; }
+      .stat { border-right: none; padding: 1.5rem 2rem; }
+      section { padding: 5rem 2rem; }
+      .about-grid, .teaching-grid, .contact-grid, .research-grid { grid-template-columns: 1fr; gap: 3rem; }
+      footer { padding: 1.5rem 2rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-name">Margaret Holloway, Ph.D.</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#teaching">Teaching</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <p class="hero-label">Scholar · Practitioner · Advocate</p>
+      <h1 class="hero-name">Margaret<br/><em>Holloway</em></h1>
+      <p class="hero-title">Ph.D. — Rhetoric & Composition</p>
+      <p class="hero-bio">
+        Associate Professor of English and Writing Program Administrator at Clark Atlanta University. 
+        I work at the intersection of rhetoric, digital literacy, and educational equity — 
+        helping students who are ready to rise find their voice and compete anywhere.
+      </p>
+      <div class="hero-cta">
+        <a href="#research" class="btn-primary">Explore My Work</a>
+        <a href="#contact" class="btn-secondary">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-visual-bg"></div>
+      <div class="hero-visual-inner">
+        <p class="hero-visual-quote">
+          "Students don't just need a great teacher. They need someone who <span>believes in them</span> before they believe in themselves."
+        </p>
+        <p class="hero-visual-attr">— Teaching Philosophy</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-num">10+</div>
+      <div class="stat-label">Years in Higher Education</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Areas of Expertise</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">Students Ready to Rise</div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-header reveal">
+      <span class="section-num">01</span>
+      <h2 class="section-title">About</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          I was born and raised between Mobile and Panola, Alabama — two places that deeply 
+          enhanced my understanding of people's lived experiences and environments. That foundation 
+          has shaped not just who I am, but how I show up professionally every single day.
+        </p>
+        <p>
+          A proud three-time graduate of the University of Alabama, I've built my career at the 
+          intersection of rhetoric, composition, and educational equity. As a young professional 
+          in higher education, I bring a wealth of experience teaching across a wide range of 
+          student learners and demographics — from first-generation college students to working 
+          adults navigating higher education for the first time.
+        </p>
+        <p>
+          I don't just teach writing. I build pathways. I create classrooms where every student — 
+          regardless of background, preparation level, or life circumstances — has the tools, 
+          the confidence, and the support to compete and succeed.
+        </p>
+        <p>
+          I'm especially passionate about supporting young women and first-generation 
+          students in finding their voice, their footing, and their competitive edge.
+        </p>
+      </div>
+      <div class="about-aside reveal">
+        <p class="aside-label">Areas of Expertise</p>
+        <ul class="expertise-list">
+          <li>Rhetoric & Composition</li>
+          <li>First-Year Writing</li>
+          <li>Writing Program Administration</li>
+          <li>Digital Literacy</li>
+          <li>Instructional Design</li>
+          <li>Curriculum Development</li>
+          <li>DEI in Higher Education</li>
+        </ul>
+        <p class="aside-label">Institutions</p>
+        <ul class="expertise-list">
+          <li>Clark Atlanta University</li>
+          <li>Concorde Career Colleges</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <div class="section-header reveal">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Research & Scholarship</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="research-grid reveal">
+      <div class="research-card">
+        <div class="research-card-num">I</div>
+        <h3 class="research-card-title">Rhetoric & Composition</h3>
+        <p class="research-card-desc">
+          Examining how rhetorical frameworks can be applied to first-year writing pedagogy 
+          to develop student voice, argumentation, and critical thinking at the college level.
+        </p>
+      </div>
+      <div class="research-card">
+        <div class="research-card-num">II</div>
+        <h3 class="research-card-title">Digital Literacy & Access</h3>
+        <p class="research-card-desc">
+          Exploring how digital literacy intersects with equity in higher education — 
+          and how writing programs can bridge the gap for underserved student populations.
+        </p>
+      </div>
+      <div class="research-card">
+        <div class="research-card-num">III</div>
+        <h3 class="research-card-title">Writing Program Administration</h3>
+        <p class="research-card-desc">
+          Developing innovative program structures and assessment models that support 
+          student success and faculty development in composition programs.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEACHING -->
+  <section id="teaching">
+    <div class="section-header reveal">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Teaching</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="teaching-grid">
+      <div class="reveal">
+        <p class="teaching-statement">
+          What makes my approach different is simple: 
+          I show up as a <em>real person.</em>
+        </p>
+        <p class="teaching-body">
+          I'm close enough to my students' experiences to understand their world, their 
+          pressures, and what's actually at stake for them. That proximity isn't just 
+          relatable — it's powerful. And I've found that students, especially those who've 
+          been underestimated, don't just need a great teacher. They need someone who 
+          believes in them before they believe in themselves. I bring that presence into 
+          every classroom, every curriculum, and every interaction.
+        </p>
+      </div>
+      <div class="reveal">
+        <p class="aside-label">Teaching Philosophy</p>
+        <p style="font-size:0.88rem;color:var(--muted);line-height:1.8;">
+          I teach across modalities — on-ground, online, and hybrid — because meeting 
+          students where they are is part of the mission. Every course I design centers 
+          student voice, critical thinking, and real-world readiness.
+        </p>
+      </div>
+    </div>
+
+    <!-- COURSE CARDS -->
+    <div class="courses-grid reveal">
+
+      <div class="course-card">
+        <div class="course-card-tag">Composition</div>
+        <div class="course-card-name">Composition I</div>
+        <div class="course-card-level-label">Academic Level</div>
+        <div class="course-card-modality"><span>Undergraduate</span></div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-card-tag">Composition</div>
+        <div class="course-card-name">Composition II</div>
+        <div class="course-card-level-label">Academic Level</div>
+        <div class="course-card-modality"><span>Undergraduate</span></div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-card-tag">Composition</div>
+        <div class="course-card-name">Advanced Grammar & Composition</div>
+        <div class="course-card-level-label">Academic Level</div>
+        <div class="course-card-modality"><span>Undergraduate</span></div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-card-tag">Composition</div>
+        <div class="course-card-name">Basic Writing</div>
+        <div class="course-card-level-label">Academic Level</div>
+        <div class="course-card-modality"><span>Undergraduate</span></div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-card-tag">Composition</div>
+        <div class="course-card-name">English Composition</div>
+        <div class="course-card-level-label">Academic Level</div>
+        <div class="course-card-modality"><span>Undergraduate</span></div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-card-tag">Literature</div>
+        <div class="course-card-name">Literary Theory</div>
+        <div class="course-card-level-label">Academic Level</div>
+        <div class="course-card-modality"><span>Undergraduate</span></div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-card-tag">Literature</div>
+        <div class="course-card-name">American Literature</div>
+        <div class="course-card-level-label">Academic Level</div>
+        <div class="course-card-modality"><span>Undergraduate</span></div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-card-tag">Literature</div>
+        <div class="course-card-name">Literature & Composition</div>
+        <div class="course-card-level-label">Academic Level</div>
+        <div class="course-card-modality"><span>Undergraduate</span></div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-card-tag">Digital Humanities</div>
+        <div class="course-card-name">Introduction to Digital Humanities</div>
+        <div class="course-card-level-label">Academic Level</div>
+        <div class="course-card-modality"><span>Graduate</span></div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-card-tag">Digital Humanities</div>
+        <div class="course-card-name">Introduction to Digital Humanities</div>
+        <div class="course-card-level-label">Academic Level</div>
+        <div class="course-card-modality"><span>Graduate</span></div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-card-tag">Humanities</div>
+        <div class="course-card-name">English Humanities: Seminar on Critical Thinking & Writing</div>
+        <div class="course-card-level-label">Academic Level</div>
+        <div class="course-card-modality"><span>Undergraduate</span></div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-card-tag">Humanities</div>
+        <div class="course-card-name">English Humanities: Intermediate Writing</div>
+        <div class="course-card-level-label">Academic Level</div>
+        <div class="course-card-modality"><span>Undergraduate</span></div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-card-tag">Communication</div>
+        <div class="course-card-name">College Communication</div>
+        <div class="course-card-level-label">Academic Level</div>
+        <div class="course-card-modality"><span>Undergraduate</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-grid">
+      <div class="reveal">
+        <p class="contact-statement">
+          Let's work<br/><em>together.</em>
+        </p>
+        <p style="font-size:0.95rem; color:var(--muted); line-height:1.8;">
+          I'm open to speaking engagements, consulting, collaborative research, 
+          and conversations about writing, literacy, and equity in higher education.
+        </p>
+      </div>
+      <div class="contact-links reveal">
+        <a href="/cdn-cgi/l/email-protection#97faf6e5f0f6e5f2e3b9fff8fbfbf8e0f6eed7f4f6e2b9f2f3e2" class="contact-link">
+          <span class="contact-link-label">Email</span>
+          <span class="__cf_email__" data-cfemail="89e4e8fbeee8fbecfda7e1e6e5e5e6fee8f0c9eae8fca7ecedfc">[email&#160;protected]</span>
+        </a>
+        <a href="https://linkedin.com/in/margaretholloway" class="contact-link" target="_blank">
+          <span class="contact-link-label">LinkedIn</span>
+          linkedin.com/in/margaretholloway
+        </a>
+        <a href="#" class="contact-link">
+          <span class="contact-link-label">Institution</span>
+          Clark Atlanta University
+        </a>
+        <a href="#" class="contact-link">
+          <span class="contact-link-label">CV</span>
+          Download Curriculum Vitae
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-name">Margaret Holloway, Ph.D.</span>
+    <span class="footer-copy">© 2026 · Associate Professor of English · Clark Atlanta University</span>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isInters
