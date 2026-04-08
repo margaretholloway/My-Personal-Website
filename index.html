@@ -594,6 +594,103 @@
       .about-grid, .teaching-grid, .contact-grid, .research-grid { grid-template-columns: 1fr; gap: 3rem; }
       footer { padding: 1.5rem 2rem; flex-direction: column; gap: 0.5rem; text-align: center; }
     }
+
+  /* PODCAST */
+.podcast-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.podcast-card {
+  border: 1px solid var(--rule);
+  padding: 2rem;
+  background: var(--cream);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  transition: border-color 0.2s;
+}
+
+.podcast-card:hover { border-color: var(--accent); }
+
+.podcast-card-tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.podcast-card-title {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+.podcast-card-meta {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.podcast-card-btn {
+  display: inline-block;
+  margin-top: auto;
+  padding: 0.6rem 1.2rem;
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  transition: background 0.2s;
+}
+
+.podcast-card-btn:hover { background: var(--accent); }
+
+    /* CONTACT FORM */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.form-input {
+  background: transparent;
+  border: 1px solid var(--rule);
+  padding: 0.75rem 1rem;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+
+.form-input:focus { border-color: var(--accent); }
+
+.form-textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+select.form-input { appearance: none; cursor: pointer; }
   </style>
 </head>
 <body>
@@ -606,7 +703,7 @@
       <li><a href="#services">Services</a></li>
       <li><a href="#research">Research</a></li>
       <li><a href="#teaching">Teaching</a></li>
-      <li><a href="#invited-talks">Invited Talks</a></li>
+      <li><a href="#invited-talks">Talks &amp; Appearances</a></li>
       <li><a href="#book-me">Book Me</a></li>
     </ul>
   </nav>
@@ -836,55 +933,139 @@
     </div>
   </section>
 
-  <!-- INVITED TALKS -->
-  <section id="invited-talks">
-    <div class="section-header reveal">
-      <span class="section-num">05</span>
-      <h2 class="section-title">Invited Talks</h2>
-      <div class="section-rule"></div>
-    </div>
-    <ul class="talks-list reveal">
-      <li class="talk-item">
-        <div class="talk-title">Add your talk title here</div>
-        <div class="talk-meta">Institution / Event &mdash; Year</div>
-      </li>
-    </ul>
-  </section>
+  <!-- TALKS & APPEARANCES -->
+<section id="invited-talks">
+  <div class="section-header reveal">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Talks &amp; Appearances</h2>
+    <div class="section-rule"></div>
+  </div>
 
-  <!-- BOOK ME / CONTACT -->
-  <section id="book-me">
-    <div class="section-header reveal">
-      <span class="section-num">06</span>
-      <h2 class="section-title">Book Me</h2>
-      <div class="section-rule"></div>
+  <!-- INVITED TALKS -->
+  <div class="aside-label reveal" style="margin-bottom: 2rem;">Invited Talks</div>
+  <ul class="talks-list reveal">
+    <li class="talk-item">
+      <div class="talk-title">Add your talk title here</div>
+      <div class="talk-meta">Institution / Event &mdash; Year</div>
+    </li>
+  </ul>
+  <!-- YOUTUBE TALK -->
+<div class="aside-label reveal" style="margin-top: 4rem; margin-bottom: 2rem;">Featured Talk</div>
+<div class="reveal" style="max-width: 700px;">
+  <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 1px solid var(--rule);">
+    <iframe 
+      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+      src="https://www.youtube.com/embed/5ZOebEfYb-Q?si=SxkNEWSvDXq_PXL1" 
+      title="Teaching & Learning with AI in College Composition"
+      frameborder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+      referrerpolicy="strict-origin-when-cross-origin" 
+      allowfullscreen>
+    </iframe>
+  </div>
+  <div style="padding: 1.2rem 0; border-bottom: 1px solid var(--rule);">
+    <div class="podcast-card-tag">Macmillan Learning TechEd 2024 Summit</div>
+    <p style="font-family: var(--serif); font-size: 1.1rem; margin-top: 0.4rem;">Teaching &amp; Learning with AI in College Composition</p>
+  </div>
+</div>
+
+  <!-- PODCAST APPEARANCES -->
+  <div class="aside-label reveal" style="margin-top: 4rem; margin-bottom: 2rem;">Podcast Appearances</div>
+  <div class="podcast-grid reveal">
+
+    <div class="podcast-card">
+      <div class="podcast-card-tag">The What And Who Of EDU</div>
+      <h3 class="podcast-card-title">Show Your Work: 10 Ways to Get Students to Reveal Their Thinking (Not Just Their Answers)</h3>
+      <p class="podcast-card-meta">Season 2, Episode 4 &mdash; March 2026 &mdash; 28 min</p>
+      <a href="https://podcasts.apple.com/us/podcast/show-your-work-10-ways-to-get-students-to-reveal-their/id1798995800?i=1000754662516" target="_blank" class="podcast-card-btn">Listen on Apple Podcasts</a>
     </div>
-    <div class="contact-grid">
-      <div class="reveal">
-        <p class="contact-statement">
-          Let's work<br/><em>together.</em>
-        </p>
-        <p style="font-size:0.95rem; color:var(--muted); line-height:1.8;">
-          I'm open to speaking engagements, consulting, collaborative research, 
-          and conversations about writing, literacy, and equity in higher education.
-        </p>
-      </div>
-      <div class="contact-links reveal">
-        <a href="mailto:margaretholloway12@gmail.com" class="contact-link">
-          <span class="contact-link-label">Email</span>
-          <span>margaretholloway12@gmail.com</span>
-        </a>
+
+    <div class="podcast-card">
+      <div class="podcast-card-tag">The What And Who Of EDU</div>
+      <h3 class="podcast-card-title">10 Teaching Strategies Teachers Once Doubted Now Swear By</h3>
+      <p class="podcast-card-meta">The What And Who Of EDU</p>
+      <a href="https://podcasts.apple.com/us/podcast/10-teaching-strategies-teachers-once-doubted-now-swear-by/id1798995800?i=1000739515159" target="_blank" class="podcast-card-btn">Listen on Apple Podcasts</a>
+    </div>
+
+    <div class="podcast-card">
+      <div class="podcast-card-tag">The What And Who Of EDU</div>
+      <h3 class="podcast-card-title">Ep. 11: From "Is This on the Test?" to "Here's What I Think"</h3>
+      <p class="podcast-card-meta">The What And Who Of EDU</p>
+      <a href="https://podcasts.apple.com/ep-11-from-is-this-on-the-test-to-heres-what-i-think/id1798995800?i=1000715431363" target="_blank" class="podcast-card-btn">Listen on Apple Podcasts</a>
+    </div>
+
+    <div class="podcast-card">
+      <div class="podcast-card-tag">The What And Who Of EDU</div>
+      <h3 class="podcast-card-title">From Blah to Aha: 10 Instructor-Approved Ways to Engage</h3>
+      <p class="podcast-card-meta">The What And Who Of EDU</p>
+      <a href="https://podcasts.apple.com/us/podcast/from-blah-to-aha-10-instructor-approved-ways-to-engage/id1798995800?i=1000711208723" target="_blank" class="podcast-card-btn">Listen on Apple Podcasts</a>
+    </div>
+
+  </div>
+</section>
+  
+  <!-- BOOK ME / CONTACT -->
+<section id="book-me">
+  <div class="section-header reveal">
+    <span class="section-num">06</span>
+    <h2 class="section-title">Book Me</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="contact-grid">
+    <div class="reveal">
+      <p class="contact-statement">
+        Let's work<br/><em>together.</em>
+      </p>
+      <p style="font-size:0.95rem; color:var(--muted); line-height:1.8;">
+        I'm open to speaking engagements, consulting, and collaborative research.
+        
+      </p>
+      <div class="contact-links" style="margin-top: 2rem;">
         <a href="https://linkedin.com/in/margaretholloway" class="contact-link" target="_blank">
           <span class="contact-link-label">LinkedIn</span>
           linkedin.com/in/margaretholloway
         </a>
+  
         <a href="#" class="contact-link">
           <span class="contact-link-label">CV</span>
           Download Curriculum Vitae
         </a>
       </div>
     </div>
-  </section>
-
+    <div class="reveal">
+      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form">
+        <input type="hidden" name="form-name" value="contact" />
+        <p style="display:none;">
+          <input name="bot-field" />
+        </p>
+        <div class="form-group">
+          <label class="form-label">Name</label>
+          <input type="text" name="name" class="form-input" placeholder="Your full name" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" name="email" class="form-input" placeholder="your@email.com" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">I'm interested in</label>
+          <select name="interest" class="form-input">
+            <option value="">Select an option</option>
+            <option value="speaking">Speaking Engagement</option>
+            <option value="consulting">Consulting</option>
+            <option value="research">Collaborative Research</option>
+            <option value="dissertation">Thesis &amp; Dissertation Help</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea name="message" class="form-input form-textarea" placeholder="Tell me a little about what you're working on..." required></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%; text-align:center; border:none; cursor:pointer;">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
   <!-- FOOTER -->
   <footer>
     <span class="footer-name">Margaret Holloway, Ph.D.</span>
