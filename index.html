@@ -691,6 +691,53 @@
 }
 
 select.form-input { appearance: none; cursor: pointer; }
+    /* BOOKS */
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.book-card {
+  display: flex;
+  gap: 1.5rem;
+  border: 1px solid var(--rule);
+  padding: 1.5rem;
+  transition: border-color 0.2s;
+}
+
+.book-card:hover { border-color: var(--accent); }
+
+.book-cover {
+  width: 120px;
+  height: 170px;
+  object-fit: cover;
+  object-position: center top;
+  flex-shrink: 0;
+  border: 1px solid var(--rule);
+}
+
+.book-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.book-title {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.3;
+  margin-top: 0.3rem;
+}
+
+.book-meta {
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
   </style>
 </head>
 <body>
@@ -834,6 +881,33 @@ select.form-input { appearance: none; cursor: pointer; }
         </p>
       </div>
     </div>
+    <!-- BOOKS -->
+<div class="aside-label reveal" style="margin-top: 4rem; margin-bottom: 2rem;">Books</div>
+<div class="books-grid reveal">
+
+  <div class="book-card">
+    <img src="cauwriter.jpg" alt="The CAU Writer" class="book-cover" />
+    <div class="book-info">
+      <div class="podcast-card-tag">Textbook &mdash; Co-Author</div>
+      <h3 class="book-title">The CAU Writer</h3>
+      <p class="book-meta">English 105, 106 &amp; 311 &mdash; Preliminary Edition</p>
+      <p class="book-meta">Co-authored with Kelly DeLong</p>
+      <p class="book-meta">Cognella Publishing, 2025</p>
+    </div>
+  </div>
+
+  <div class="book-card">
+    <img src="stolenidentity.jpg" alt="Stolen Identity" class="book-cover" />
+    <div class="book-info">
+      <div class="podcast-card-tag">Self-Help &mdash; Editor</div>
+      <h3 class="book-title">Stolen Identity</h3>
+      <p class="book-meta">The Guide to Break the Mold</p>
+      <p class="book-meta">Written by Wilfred Bolds Jr.</p>
+      <p class="book-meta">Bolds Coaching LLC, 2025</p>
+    </div>
+  </div>
+
+</div>
   </section>
 
   <!-- TEACHING -->
